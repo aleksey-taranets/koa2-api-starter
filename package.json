@@ -1,0 +1,33 @@
+{
+  "name": "koa2-api-starter",
+  "version": "0.0.1",
+  "description": "Koa2 REST API Starter",
+  "main": "api.js",
+  "dependencies": {
+    "config": "^1.25.1",
+    "koa": "^2.0.1",
+    "koa-better-body": "^3.0.2",
+    "koa-mount": "^2.0.0",
+    "koa-qs": "^2.0.0",
+    "koa-router": "^7.0.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-babel": "^4.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+    "dev": "nodemon api.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Koa2"
+  ],
+  "author": "Aleksey Taranets",
+  "license": "ISC"
+}
