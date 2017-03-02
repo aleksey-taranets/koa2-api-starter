@@ -1,7 +1,7 @@
 # Koa2 API Starter
 
 ## Links
-- [Git](http://github.com)
+- [Git](https://github.com/aleksey-taranets/koa2-api-starter)
 
 ## Development
 ##### Requirements:

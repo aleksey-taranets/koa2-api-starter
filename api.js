@@ -2,12 +2,16 @@ const Koa = require('koa');
 const config = require('config');
 const koaQs = require('koa-qs');
 const body = require('koa-better-body');
+const helmet = require('koa-helmet');
+
 const log = require('./utils/log');
 const initModules = require('./modules');
+
 const api = new Koa();
 
 koaQs(api);
 api
+  .use(helmet())
   .use(body());
 
 // middlewares
