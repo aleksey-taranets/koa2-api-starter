@@ -2,8 +2,10 @@ import test from 'ava';
 import request from 'supertest';
 import api from './index';
 
+const apiServer = request(api.listen());
+
 test('test /hello-world', async t => {
-  const res = await request(api.listen()).get('/');
+  const res = await apiServer.get('/');
   t.is(res.status, 200);
 });
 
