@@ -1,15 +1,17 @@
-const winston = require('winston');
-const path = require('path');
+import winston from 'winston';
+import path from 'path';
 
 const timestamp = () => {
   const d = new Date();
-  return `${d.toLocaleTimeString('en-US', { hour12: false })}.${d.getMilliseconds()} ${d.toLocaleDateString()}`;
+  return `${d.toLocaleTimeString('en-US', {
+    hour12: false,
+  })}.${d.getMilliseconds()} ${d.toLocaleDateString()}`;
 };
-const formatter = (options) => {
+const formatter = function formatter(options) {
   return `${timestamp()} ${options.level.toUpperCase()} - ${options.message}`;
 };
 
-const infoFile = new (winston.transports.File)({
+const infoFile = new winston.transports.File({
   name: 'info-file',
   filename: path.join(__dirname, './../logs/info.log'),
   level: 'info',
@@ -18,7 +20,7 @@ const infoFile = new (winston.transports.File)({
   maxFiles: 5,
 });
 
-const infoConsole = new (winston.transports.Console)({
+const infoConsole = new winston.transports.Console({
   name: 'info-console',
   level: 'info',
   handleExceptions: true,
@@ -26,7 +28,7 @@ const infoConsole = new (winston.transports.Console)({
   colorize: true,
 });
 
-const errorFile = new (winston.transports.File)({
+const errorFile = new winston.transports.File({
   name: 'error-file',
   filename: path.join(__dirname, './../logs/error.log'),
   level: 'error',
@@ -35,7 +37,7 @@ const errorFile = new (winston.transports.File)({
   maxFiles: 5,
 });
 
-const errorConsole = new (winston.transports.Console)({
+const errorConsole = new winston.transports.Console({
   name: 'error-console',
   level: 'error',
   handleExceptions: true,
@@ -43,7 +45,7 @@ const errorConsole = new (winston.transports.Console)({
   colorize: true,
 });
 
-const debugFile = new (winston.transports.File)({
+const debugFile = new winston.transports.File({
   name: 'debug-file',
   filename: path.join(__dirname, './../logs/debug.log'),
   level: 'debug',
@@ -52,7 +54,7 @@ const debugFile = new (winston.transports.File)({
   maxFiles: 5,
 });
 
-const debugConsole = new (winston.transports.Console)({
+const debugConsole = new winston.transports.Console({
   level: 'debug',
   handleExceptions: true,
   formatter,
@@ -70,7 +72,7 @@ if (process.env.NODE_ENV === 'production') {
 
 winston.addColors({ debug: 'green', info: 'blue', warn: 'yellow', error: 'red' });
 
-const log = new (winston.Logger)({
+const log = new winston.Logger({
   transports,
 });
 
