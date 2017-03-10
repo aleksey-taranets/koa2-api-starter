@@ -3,28 +3,57 @@
   "version": "0.0.1",
   "description": "Koa2 REST API Starter",
   "main": "api.js",
+  "scripts": {
+    "start": "rimraf ./dist && babel -d ./dist ./src -s && node dist/api.js",
+    "dev": "nodemon ./dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
-    "config": "^1.25.1",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-env": "^1.2.1",
     "koa": "^2.0.1",
     "koa-better-body": "^3.0.2",
     "koa-helmet": "^3.1.0",
     "koa-mount": "^2.0.0",
     "koa-qs": "^2.0.0",
     "koa-router": "^7.0.1",
+    "rimraf": "^2.6.1",
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "babel-register": "^6.23.0",
     "eslint": "^3.16.1",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-babel": "^4.1.0",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-config-prettier": "^1.5.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.0",
     "nodemon": "^1.11.0"
   },
-  "scripts": {
-    "dev": "nodemon api.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-param-reassign": 0,
+      "no-console": 1,
+      "strict": 2
+    }
   },
   "keywords": [
     "Koa2"
