@@ -1,19 +1,18 @@
-const Router = require('koa-router');
-const Koa = require('koa');
+import Router from 'koa-router';
+import Koa from 'koa';
+import userService from './userService';
 
 const api = new Koa();
 const router = new Router();
 
-router.get('/', (ctx) => {
+router.get('/', ctx => {
   ctx.body = 'Hello World';
 });
 
-router.get('/nested', (ctx) => {
-  ctx.body = 'Hello World Nested';
+router.get('/db', async ctx => {
+  ctx.body = await userService.findOne({ email: 'as@as.as' });
 });
 
-api
-  .use(router.routes())
-  .use(router.allowedMethods());
+api.use(router.routes()).use(router.allowedMethods());
 
 module.exports = api;

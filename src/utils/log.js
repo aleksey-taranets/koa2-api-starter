@@ -45,19 +45,9 @@ const errorConsole = new winston.transports.Console({
   colorize: true,
 });
 
-const debugFile = new winston.transports.File({
-  name: 'debug-file',
-  filename: path.join(__dirname, './../logs/debug.log'),
-  level: 'debug',
-  json: false,
-  maxsize: 5242880,
-  maxFiles: 5,
-});
-
 const debugConsole = new winston.transports.Console({
   level: 'debug',
   handleExceptions: true,
-  formatter,
   colorize: true,
 });
 
@@ -65,15 +55,13 @@ let transports = [];
 if (process.env.NODE_ENV === 'production') {
   transports = [infoConsole, errorConsole, errorFile];
 } else if (process.env.NODE_ENV === 'test') {
-  transports = [infoConsole, errorConsole, infoFile, errorFile, debugConsole, debugFile];
+  transports = [infoConsole, errorConsole, infoFile, errorFile];
 } else {
-  transports = [infoConsole, errorConsole, debugConsole];
+  transports = [debugConsole];
 }
 
 winston.addColors({ debug: 'green', info: 'blue', warn: 'yellow', error: 'red' });
 
-const log = new winston.Logger({
+export default new winston.Logger({
   transports,
 });
-
-module.exports = log;

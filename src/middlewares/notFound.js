@@ -3,8 +3,8 @@ import config from '../config';
 module.exports = async ctx => {
   ctx.status = 404;
   ctx.body = {
-    app: config.Api.name,
+    app: config.api.name,
     error: 'Not Found',
-    version: config.Api.version,
+    version: config.api.version,
   };
 };

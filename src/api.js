@@ -7,18 +7,22 @@ import config from './config';
 import log from './utils/log';
 import initModules from './modules';
 import notFound from './middlewares/notFound';
+import errorHandler from './middlewares/errorHandler';
+
+import './db';
 
 const api = new Koa();
 
+process.on('uncaughtException', err => log.error(err.message, err.stack));
+process.on('uncaughtRejection', err => log.error(err.message, err.stack));
+
 koaQs(api);
-api.use(helmet()).use(body());
+api.use(errorHandler).use(helmet()).use(body());
 
 // middlewares
 initModules(api);
 api.use(notFound);
 
 // Start API
-api.listen(config.Api.port);
-log.info(`Application is runing on port - ${config.Api.port}`);
-
-export default api;
+api.listen(config.api.port);
+log.info(`Application is runing on port - ${config.api.port}`);

@@ -11,11 +11,15 @@
     "test": "NODE_ENV=test ava",
     "test:watch": "NODE_ENV=test ava --watch"
   },
-  "pre-commit": ["lint-staged", "test"],
+  "pre-commit": [
+    "lint-staged",
+    "test"
+  ],
   "dependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-preset-env": "^1.2.1",
+    "bcrypt": "^1.0.2",
     "koa": "^2.0.1",
     "koa-better-body": "^3.0.2",
     "koa-helmet": "^3.1.0",
@@ -23,6 +27,8 @@
     "koa-qs": "^2.0.0",
     "koa-router": "^7.0.1",
     "rimraf": "^2.6.1",
+    "sails-mongo": "^0.12.2",
+    "waterline": "^0.11.11",
     "winston": "^2.3.1"
   },
   "devDependencies": {
