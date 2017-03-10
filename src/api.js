@@ -20,3 +20,5 @@ api.use(notFound);
 // Start API
 api.listen(config.Api.port);
 log.info(`Application is runing on port - ${config.Api.port}`);
+
+export default api;
