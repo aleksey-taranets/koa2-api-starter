@@ -7,8 +7,6 @@ import log from './utils/log';
 
 class DB {
   constructor() {
-    log.debug('constructor DB');
-
     this.dbConfig = {
       adapters: {
         mongodb: mongodbAdapter,
@@ -32,6 +30,7 @@ class DB {
         if (err) {
           reject(err.message);
         }
+        log.info('DB connected');
         resolve(models.collections, models.connections);
         return this;
       });

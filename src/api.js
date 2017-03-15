@@ -8,21 +8,26 @@ import log from './utils/log';
 import initModules from './modules';
 import notFound from './middlewares/notFound';
 import errorHandler from './middlewares/errorHandler';
+import db from './db';
 
-import './db';
+db.connection
+  .then(() => {
+    const api = new Koa();
 
-const api = new Koa();
+    process.on('uncaughtException', err => log.error(err.message, err.stack));
+    process.on('uncaughtRejection', err => log.error(err.message, err.stack));
 
-process.on('uncaughtException', err => log.error(err.message, err.stack));
-process.on('uncaughtRejection', err => log.error(err.message, err.stack));
+    koaQs(api);
+    api.use(errorHandler);
+    api.use(helmet());
+    api.use(body());
 
-koaQs(api);
-api.use(errorHandler).use(helmet()).use(body());
+    // middlewares
+    initModules(api);
+    api.use(notFound);
 
-// middlewares
-initModules(api);
-api.use(notFound);
-
-// Start API
-api.listen(config.api.port);
-log.info(`Application is runing on port - ${config.api.port}`);
+    // Start API
+    api.listen(config.api.port);
+    log.info(`Application is runing on port - ${config.api.port}`);
+  })
+  .catch(log.error);
