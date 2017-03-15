@@ -55,7 +55,7 @@ let transports = [];
 if (process.env.NODE_ENV === 'production') {
   transports = [infoConsole, errorConsole, errorFile];
 } else if (process.env.NODE_ENV === 'test') {
-  transports = [infoConsole, errorConsole, infoFile, errorFile];
+  transports = [infoFile, errorFile];
 } else {
   transports = [debugConsole];
 }

@@ -7,9 +7,9 @@ export default class BaseModelService {
     this.init(name);
   }
 
-  async init(name) {
+  init(name) {
     try {
-      this.collection = await this.db.model(name);
+      this.collection = this.db.model(name);
     } catch (err) {
       throw new ModelError(err.message);
     }

@@ -1,9 +1,9 @@
-const mount = require('koa-mount');
-const HelloWorlds = require('./hello-world');
+import mount from 'koa-mount';
+import HelloWorlds from './hello-world';
 
-const initModules = (api) => {
+const initModules = api => {
   api.use(mount('/hello-world', HelloWorlds));
   return api;
 };
 
-module.exports = initModules;
+export default initModules;
