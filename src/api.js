@@ -10,7 +10,8 @@ import notFound from './middlewares/notFound';
 import errorHandler from './middlewares/errorHandler';
 import db from './db';
 
-db.connection
+db
+  .connect()
   .then(() => {
     const api = new Koa();
 

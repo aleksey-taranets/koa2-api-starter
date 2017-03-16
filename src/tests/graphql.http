@@ -1,0 +1,20 @@
+POST http://localhost:3000/user HTTP/1.1
+content-type: application/graphql
+
+mutation { 
+  createUser(user: {
+    name: "a", email: "a1s@qasqssw.qw", password: "sddds"
+  }) { 
+    id, name, email 
+  }
+}
+###
+GET http://localhost:3000/user HTTP/1.1
+content-type: application/graphql
+
+{ 
+  user {
+    name,
+    email
+  }
+}

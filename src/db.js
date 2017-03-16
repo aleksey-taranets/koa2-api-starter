@@ -1,6 +1,6 @@
 import mongodbAdapter from 'sails-mongo';
 import Waterline from 'waterline';
-import fs from 'fs';
+import recursiveReadSync from 'recursive-readdir-sync';
 import path from 'path';
 import config from './config';
 import log from './utils/log';
@@ -16,12 +16,11 @@ class DB {
     this.waterlineOrm = new Waterline();
     this.modelsDir = path.join(__dirname, '/models');
 
-    fs
-      .readdirSync(this.modelsDir)
-      .filter(file => file.indexOf('.') !== 0 && file !== 'index.js')
+    recursiveReadSync(this.modelsDir)
+      .filter(file => file.indexOf('.model.js') !== -1)
       .forEach(file => {
         // eslint-disable-next-line import/no-dynamic-require, global-require
-        const model = require(path.join(this.modelsDir, file)).default;
+        const model = require(file).default;
         this.waterlineOrm.loadCollection(model);
       });
 
@@ -37,9 +36,14 @@ class DB {
     });
   }
 
+  connect() {
+    return this.connection;
+  }
+
   async model(name) {
     const models = await this.connection;
-    return models[name];
+    const model = await models[name];
+    return model;
   }
 }
 

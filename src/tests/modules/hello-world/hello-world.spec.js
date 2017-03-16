@@ -1,10 +1,13 @@
 import { describe } from 'ava-spec';
 import request from 'supertest';
 import moduleApi from '../../../modules/hello-world';
+import DB from '../../../db';
 
 const apiServer = request(moduleApi.listen());
 
 describe('module#1', it => {
+  it.before(() => DB.connect());
+
   it('test /hello-world', async t => {
     const res = await apiServer.get('/');
     t.is(res.status, 200);

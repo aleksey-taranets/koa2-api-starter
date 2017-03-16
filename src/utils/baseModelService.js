@@ -7,17 +7,21 @@ export default class BaseModelService {
     this.init(name);
   }
 
-  init(name) {
+  async init(name) {
     try {
-      this.collection = this.db.model(name);
+      this.collection = await this.db.model(name);
     } catch (err) {
-      throw new ModelError(err.message);
+      throw new ModelError(this.db.model);
     }
+    return this;
   }
 
-  async find(query) {
-    const result = await this.collection.find(query);
-    return this.prepareRespons(result);
+  async find(query = {}) {
+    return this.collection.find(query);
+  }
+
+  async create(doc) {
+    return this.collection.create(doc);
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import Koa from 'koa';
-import userService from './userService';
+import userService from '../../services/userService';
 
 const moduleApi = new Koa();
 const router = new Router();

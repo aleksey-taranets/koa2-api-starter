@@ -21,7 +21,6 @@ const User = Waterline.Collection.extend({
     },
     classes: {
       type: 'array',
-      required: true,
     },
     toJSON() {
       const obj = this.toObject();
