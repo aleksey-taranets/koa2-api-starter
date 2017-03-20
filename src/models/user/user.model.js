@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 const User = Waterline.Collection.extend({
   identity: 'user',
   connection: 'mongodb',
+  migrate: 'safe',
   attributes: {
     email: {
       type: 'string',

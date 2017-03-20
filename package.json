@@ -4,8 +4,11 @@
   "description": "Koa2 REST API Starter",
   "main": "dev.js",
   "scripts": {
-    "start": "rimraf ./dist && babel -d ./dist ./src -s && NODE_ENV=production node --harmony ./dist/api.js",
+    "start": "npm run clean && npm run build && npm run prod",
+    "prod": "NODE_ENV=production node ./dist/api.js",
     "dev": "nodemon ./dev.js",
+    "build": "babel -d ./dist ./src -s",
+    "clean": "rimraf ./dist",
     "lint:js": "eslint ./src",
     "lint-staged": "lint-staged",
     "test": "NODE_ENV=test ava",

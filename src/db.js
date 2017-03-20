@@ -17,7 +17,7 @@ class DB {
     this.modelsDir = path.join(__dirname, '/models');
 
     recursiveReadSync(this.modelsDir)
-      .filter(file => file.indexOf('.model.js') !== -1)
+      .filter(file => file.indexOf('.model.js') !== -1 && file.indexOf('.map') === -1)
       .forEach(file => {
         // eslint-disable-next-line import/no-dynamic-require, global-require
         const model = require(file).default;
@@ -26,12 +26,9 @@ class DB {
 
     this.connection = new Promise((resolve, reject) => {
       this.waterlineOrm.initialize(this.dbConfig, (err, models) => {
-        if (err) {
-          reject(err.message);
-        }
+        if (err) reject(err.message);
         log.info('DB connected');
-        resolve(models.collections, models.connections);
-        return this;
+        resolve(models.collections);
       });
     });
   }
@@ -41,9 +38,14 @@ class DB {
   }
 
   async model(name) {
-    const models = await this.connection;
-    const model = await models[name];
-    return model;
+    try {
+      const models = await this.connection;
+      const model = await models[name];
+      return model;
+    } catch (err) {
+      log.error(err.message);
+      return null;
+    }
   }
 }
 
