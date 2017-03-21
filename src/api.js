@@ -3,7 +3,6 @@ import koaQs from 'koa-qs';
 import body from 'koa-better-body';
 import helmet from 'koa-helmet';
 import logger from 'koa-logger';
-import jwt from 'koa-jwt';
 
 import config from './config';
 import log from './utils/log';
@@ -19,13 +18,6 @@ db
 
     // external middlewares
     koaQs(api);
-    api.use(
-      jwt({
-        secret: config.api.jwtSecret,
-        passthrough: true,
-        key: 'jwtdata',
-      }),
-    );
     api.use(helmet());
     api.use(body());
 
@@ -34,8 +26,8 @@ db
     }
 
     // middlewares
-    initModules(api);
     api.use(errorHandler);
+    initModules(api);
     api.use(notFound);
 
     // Start API

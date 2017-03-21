@@ -13,7 +13,7 @@ export default async (ctx, next) => {
 
     if (err instanceof HttpError) {
       ctx.status = err.status;
-      if (err.status === 403) {
+      if (err.status === 401) {
         ctx.body = { error: 'Protected resource, use Authorization header to get access' };
       }
     } else {

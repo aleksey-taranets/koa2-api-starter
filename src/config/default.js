@@ -5,7 +5,10 @@ module.exports = {
     name: packageJson.name,
     version: packageJson.version,
     port: process.env.PORT || 3000,
-    jwtSecret: 'simple api secret',
+  },
+  jwt: {
+    secret: 'simple api secret',
+    key: process.env.JWT_KEY || 'jwtdata',
   },
   db: {
     connections: {

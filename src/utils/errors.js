@@ -18,7 +18,7 @@ export class HttpError extends AppError {
     super(message, extra);
     this.name = this.constructor.name;
     this.status = status;
-    log.warn(message, this.stack);
+    log.error(this.stack);
   }
 }
 
@@ -26,7 +26,7 @@ export class ServiceError extends AppError {
   constructor(message, extra) {
     super(message, extra);
     this.name = this.constructor.name;
-    log.error(message, this.stack);
+    log.error(this.stack);
   }
 }
 
