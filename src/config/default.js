@@ -3,8 +3,9 @@ import packageJson from '../../package.json';
 module.exports = {
   api: {
     name: packageJson.name,
-    version: 'v1',
+    version: packageJson.version,
     port: process.env.PORT || 3000,
+    jwtSecret: 'simple api secret',
   },
   db: {
     connections: {

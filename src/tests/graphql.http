@@ -18,3 +18,17 @@ content-type: application/graphql
     email
   }
 }
+
+###
+GET http://localhost:3000/user/only-for-admin HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInNheSI6IkhpISIsImlhdCI6MTQ5MDAyNTc3MH0.-T5WfTUIDCi4qJFQBdvG_im1UWRGVtAP4MdOy6awZZA
+
+###
+GET http://localhost:3000/user/get-test-token HTTP/1.1
+content-type: text/html
+
+###
+POST http://localhost:3000/user/check-test-token HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInNheSI6IkhpISIsImlhdCI6MTQ5MDAyNTc3MH0.-T5WfTUIDCi4qJFQBdvG_im1UWRGVtAP4MdOy6awZZA
